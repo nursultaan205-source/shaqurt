@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaqurt — 3.1-сабақ: Портфолио & Аккаунтты бекіту</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0d0714;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --color-orange: #ff6b35;
+            --color-purple: #8a2be2;
+            --color-lime: #00ff66;
+            --color-pink: #ff007f;
+            --text-light: #ffffff;
+            --text-muted: #c3b8d8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+        }
+
+        /* Навигация */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(13, 7, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 15px 20px;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-lime);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--color-lime);
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: var(--color-lime);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .lesson-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255, 0, 127, 0.2);
+            border: 1px solid var(--color-pink);
+            color: var(--color-pink);
+            font-weight: 700;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Контент блоктары */
+        .content-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 0, 127, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .content-section h2 {
+            font-size: 1.5rem;
+            color: var(--color-pink);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        /* Ескерту / Кеңес блогы */
+        .tip-box {
+            margin-top: 20px;
+            padding: 18px;
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid var(--color-orange);
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .tip-box strong {
+            color: var(--color-orange);
+        }
+
+        /* Тізімдер */
+        .custom-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .custom-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
+        .custom-list li::before {
+            content: "💎";
+            position: absolute;
+            left: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Профиль шапкасының үлгісі (Demo Bio) */
+        .bio-demo-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: sans-serif;
+        }
+
+        .bio-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .bio-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .bio-name h4 {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .bio-name p {
+            font-size: 0.85rem;
+            color: var(--color-lime);
+            margin-bottom: 0;
+        }
+
+        .bio-text {
+            color: var(--text-light);
+            font-size: 0.92rem;
+            line-height: 1.5;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        /* Навигация батырмалары */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .nav_btn {
+            padding: 16px 28px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-prev:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-next {
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav_btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="module3.html" class="btn-back">← 3-Модульге қайту</a>
+            <div class="brand-logo">SHAQURT</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="lesson-header">
+            <div class="lesson-hero">
+                <span class="lesson-badge">1-сабақ • 3-Модуль</span>
+                <h1 class="lesson-title">Портфолио & Аккаунтты бекіту</h1>
+                <p class="lesson-subtitle">Ақша табудың алғашқы қадамы: сенімді портфолио жинау және TikTok / Instagram профилін сатуға дайындау.</p>
+            </div>
+        </div>
+
+        <!-- 1-Бөлім: Ақша психологиясы және Сенім -->
+        <div class="content-section">
+            <h2>💰 Неге бұл сабақ ақша табу үшін өте маңызды?</h2>
+            <p>Клиент сізге ақша төлемес бұрын, оның санасында жалғыз ғана сұрақ болады: <strong>«Бұл адамға сенуге бола ма? Ол маған әдемі әрі тез арада дайын сайт жасап бере ала ма?»</strong></p>
+            <p>Егер сіздің аккаунтыңыз бос болса немесе бейберекет суреттер тұрса, клиент бағасын да сұрамай, басқа орындаушыға кетіп қалады. Портфолио мен дұрыс безендірілген аккаунт — сіздің 24/7 жұмыс істейтін онлайн-витринаңыз.</p>
+
+            <div class="tip-box">
+                🔑 <strong>Алтын ереже:</strong> Клиенттер сайттың кодын немесе қандай тілде жазылғанын сатып алмайды. Олар **визуалды сұлулықты, ыңғайлылықты және өз мәселесінің шешімін** сатып алады!
+            </div>
+        </div>
+
+        <!-- 2-Бөлім: Нөлден портфолио жинау -->
+        <div class="content-section">
+            <h2>📁 Нөлден қуатты Портфолио қалай жинаймыз?</h2>
+            <p>«Менде әлі реальный клиент болған жоқ, портфолиоға не қоямын?» деп уайымдаудың мүлде қажеті жоқ! Алғашқы 3-4 концептуалды кейсті өзіңіз ойдан құрастырасыз:</p>
+
+            <ul class="custom-list">
+                <li><strong>1-кейстік сайт:</strong> Сәнді «Үйлену тойы» немесе «Ұзату тойы» шақыруы (Алтын/Ақ түсті премиум стиль).</li>
+                <li><strong>2-кейстік сайт:</strong> Көңілді «Туған күн» немесе «Мерейтой» шақыруы (Заманауи неон немесе минимализм).</li>
+                <li><strong>3-кейстік сайт:</strong> «Сүндет той» немесе «Қоныс той» форматы.</li>
+            </ul>
+
+            <p>Бұл 3 сайт сіздің шеберлігіңізді, түрлі стильдерде жұмыс істей алатыныңызды және интерактивті фишкаларды (RSVP, Таймер, Карта) меңгергеніңізді толық дәлелдейді.</p>
+        </div>
+
+        <!-- 3-Бөлім: Эксперттік аккаунтты бекіту (Bio) -->
+        <div class="content-section">
+            <h2>📲 TikTok / Instagram профилін дұрыс баптау</h2>
+            <p>Клиент сіздің профиліңізге кіргенде 3 секунд ішінде немен айналысатыныңызды түсінуі керек.</p>
+
+            <p><strong>Профиль шапкасының (Bio) формуласы:</strong></p>
+            <ul class="custom-list">
+                <li><strong>Аты (Header Name):</strong> Іздеуде шығу үшін түйін сөздер: <em>«Онлайн шақыру | Электронды шақырту»</em>.</li>
+                <li><strong>УТП (Уникальное торговое предложение):</strong> Неге дәл сіз? (Мысалы: <em>«1 сағатта дайын | Интерактивті RSVP мен музыка»</em>).</li>
+                <li><strong>Call to Action (Әрекетке шақыру):</strong> <em>«Тапсырыс беру немесе үлгілерді көру үшін төмендегі сілтемені басыңыз 👇»</em>.</li>
+            </ul>
+
+            <!-- Профиль үлгісі (Demo Card) -->
+            <div class="bio-demo-card">
+                <div class="bio-header">
+                    <div class="bio-avatar">SQ</div>
+                    <div class="bio-name">
+                        <h4>SHAQURT | Онлайн Шақырулар</h4>
+                        <p>@shaqurt_invitations</p>
+                    </div>
+                </div>
+                <div class="bio-text">
+                    ✨ Электронды той шақыруларын 2 сағатта жинаймын<br>
+                    💌 Интерактивті RSVP, 2GIS картасы және фонолық музыка<br>
+                    👇 Төмендегі сілтеме арқылы 20+ дайын үлгіні қараңыз:<br>
+                    <span style="color: var(--color-lime); text-decoration: underline;">wa.me/77001234567</span>
+                </div>
+            </div>
+
+            <div class="tip-box" style="border-left-color: var(--color-lime); background: rgba(0, 255, 102, 0.05);">
+                ✨ <strong>Бизнес-кеңес:</strong> Аватаркаға сапалы, ашық түсті логотип немесе өзіңіздің жинақы түскен фотоңызды қойыңыз. Бұл сенімділікті 50%-ға арттырады!
+            </div>
+        </div>
+
+        <!-- Навигация батырмалары -->
+        <div class="nav-buttons">
+            <a href="module3.html" class="nav_btn btn-prev">← 3-Модульге қайту</a>
+            <a href="lesson3_2.html" class="nav_btn btn-next">3.2-сабақ: Вирустық Контент (Reels/TikTok) ➔</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 SHAQURT Курсы. 3.1-сабақ оқу материалы.</p>
+    </footer>
+
+</body>
+</html>

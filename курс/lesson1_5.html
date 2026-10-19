@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaqurt — 1.5-сабақ: Фото, видео және рамкаларды оңтайландыру</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0d0714;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --color-orange: #ff6b35;
+            --color-purple: #8a2be2;
+            --color-lime: #00ff66;
+            --color-pink: #ff007f;
+            --text-light: #ffffff;
+            --text-muted: #c3b8d8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+        }
+
+        /* Навигация */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(13, 7, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 15px 20px;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-lime);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--color-lime);
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: var(--color-lime);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .lesson-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(0, 255, 102, 0.15);
+            border: 1px solid var(--color-lime);
+            color: var(--color-lime);
+            font-weight: 700;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Контент блоктары */
+        .content-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .content-section h2 {
+            font-size: 1.5rem;
+            color: var(--color-lime);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        /* Карточкалар торы */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .info-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 14px;
+            padding: 20px;
+            border-top: 4px solid var(--color-orange);
+        }
+
+        .info-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .info-card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* Ескерту / Кеңес блогы */
+        .tip-box {
+            margin-top: 20px;
+            padding: 18px;
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid var(--color-orange);
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .tip-box strong {
+            color: var(--color-orange);
+        }
+
+        /* Списоктар стилі */
+        .custom-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .custom-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
+        .custom-list li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: var(--color-lime);
+            font-weight: bold;
+        }
+
+        /* Навигация батырмалары */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            padding: 16px 28px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-prev:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-next {
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="Untitled-2.html" class="btn-back">← Модульге қайту</a>
+            <div class="brand-logo">SHAQURT</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="lesson-header">
+            <div class="lesson-hero">
+                <span class="lesson-badge">5-сабақ • 1-Модуль</span>
+                <h1 class="lesson-title">Фото, видео және рамкаларды оңтайландыру</h1>
+                <p class="lesson-subtitle">Сайтты ұшатындай етіп жылдам жасау, суреттерді дұрыс сығу, рамкаларды қолдану және видео эффектілерін орынды пайдалану ережелері.</p>
+            </div>
+        </div>
+
+        <!-- 1-Бөлім: Сайт жылдамдығы -->
+        <div class="content-section">
+            <h2>⚡ Сайт жылдамдығы неге шешуші рөл атқарады?</h2>
+            <p>Сайт жылдамдығы — шақыртудың ашылып, мазмұнының пайдаланушыға көрінуіне кететін уақыт. Мысалы, сен шақыртуды досыңа жібердің. Ол сілтемені басқанда шақырту <strong>2 секундта</strong> ашылса, оны бірден көре алады. Ал <strong>15 секунд</strong> күтуге тура келсе, ол жалығып, бетті жауып кетуі мүмкін.</p>
+            
+            <p>Сайттың баяу ашылуына бірнеше нәрсе әсер етеді:</p>
+            <ul class="custom-list">
+                <li>Суреттердің файл көлемі тым үлкен.</li>
+                <li>Видео ұзақ немесе ауыр.</li>
+                <li>Анимациялар мен эффектілер тым көп.</li>
+                <li>Сайттағы басқа файлдар да көп орын алады.</li>
+                <li>Интернет байланысы баяу.</li>
+            </ul>
+            
+            <div class="tip-box">
+                💡 <strong>Алтын ереже:</strong> Әдемі шақырту — тек әдемі көрінетін шақырту емес, сонымен бірге тез ашылатын шақырту!
+            </div>
+        </div>
+
+        <!-- 2-Бөлім: Суретті сығу және оңтайландыру -->
+        <div class="content-section">
+            <h2>🖼️ Суретті сығу және оңтайландыру дегеніміз не?</h2>
+            <p>Суретті сығу дегеніміз — оның файл көлемін азайту. Яғни сурет телефонда немесе сайтта аз орын алады және интернет арқылы жылдамырақ жүктеледі. Мысалы, бір суреттің көлемі <strong>5 МБ</strong> болса, оны сығып, көлемін <strong>500 КБ</strong>-қа дейін азайтуға болады. Бұл кезде сурет бұрынғыдан он есе кіші болады, ал көзге көрінетін сапасы жеткілікті жақсы болып қалады.</p>
+            
+            <p><strong>Суретті қалай оңтайландырамыз?</strong></p>
+            <ul class="custom-list">
+                <li><strong>Өлшемін ретте:</strong> Шақыртуда кішкентай болып көрінетін суретке 4000×3000 пиксельдей үлкен өлшем қажет емес.</li>
+                <li><strong>Форматты дұрыс таңда:</strong> Фотосуреттерге көбіне <strong>JPEG</strong> немесе <strong>WebP</strong> қолайлы. Мөлдір фон қажет болса, <strong>PNG</strong> қолдан.</li>
+                <li><strong>Сапаны тексер:</strong> Суретті қатты сығып, бұлыңғыр етіп жіберме. (Мұны орындау үшін Canva немесе Squoosh сияқты құралдарды қолдануға болады).</li>
+            </ul>
+        </div>
+
+        <!-- 3-Бөлім: Рамкалар -->
+        <div class="content-section">
+            <h2>🖼️ Рамкаларды эстетикалық қолдану</h2>
+            <p>Рамка — суреттің немесе шақырту бетінің айналасына қойылатын жиек. Ол шақыртуды жинақы, әдемі және көзге жағымды етіп көрсетеді. Мысалы, туған күн иесінің суретінің айналасына жұқа ақ рамка қоссаң, сурет фоннан анық бөлініп тұрады.</p>
+
+            <div class="grid-cards">
+                <div class="info-card">
+                    <h4>Жұқа рамка</h4>
+                    <p>Қарапайым әрі заманауи minimalist шақыртуларға өте жарасады.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Дөңгелек бұрышты рамка</h4>
+                    <p>Жұмсақ, достық және көңілді дизайн форматына қолайлы.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Алтын түсті рамка</h4>
+                    <p>Үйлену тойы немесе салтанатты кештерге ерекше сән береді.</p>
+                </div>
+            </div>
+
+            <div class="tip-box" style="margin-top: 20px; border-left-color: var(--color-lime); background: rgba(0, 255, 102, 0.05);">
+                ⚠️ <strong>Маңызды ескерту:</strong> Рамка шақыртуды безендіруі керек, ал негізгі мәтін мен суреттерден назарды тартып алмауы тиіс. Бір шақыртуда 1-2 үйлесімді стильді ғана қолдан!
+            </div>
+        </div>
+
+        <!-- 4-Бөлім: Видео эффектілер -->
+        <div class="content-section">
+            <h2>✨ Видео мен эффектілерді қалай дұрыс қолданамыз?</h2>
+            <p>Кейбір шақыртуларда жай суреттің орнына қысқа видео немесе қозғалыс эффектілері (шарлардың көтерілуі, жұлдыздардың жарқырауы, атаудың біртіндеп шығуы) қолданылады. Бұл шақыртуды қызықты етеді, бірақ шектен тыс қолдану сайтты ауырлатады.</p>
+
+            <p><strong>Үш маңызды ережені ұстан:</strong></p>
+            <ul class="custom-list">
+                <li>Қозғалыс эффектілерін тек ең маңызды элементтерге ғана қолдан.</li>
+                <li>Видеоны мүмкіндігінше қысқа әрі көлемі шағын етіп дайында.</li>
+                <li>Қажет болмаса, бірнеше үлкен видеоны бір шақыртуға қатар қоспа (жеңіл анимация немесе сапалы статикалық сурет әлдеқайда тиімдірек).</li>
+            </ul>
+        </div>
+
+        <!-- Сабақ арасындағы навигация -->
+        <div class="nav-buttons">
+            <a href="lesson1_4.html" class="nav-btn btn-prev">← 1.4-сабақ</a>
+            <a href="lesson1_6.html" class="nav-btn btn-next">1.6-сабаққа өту: Практика ➔</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 SHAQURT Курсы. 1.5-сабақ оқу материалы.</p>
+    </footer>
+
+</body>
+</html>

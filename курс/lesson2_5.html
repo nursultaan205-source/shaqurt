@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaqurt — 2.5-сабақ: Фонолық музыка және Аудиоплеер</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0d0714;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --color-orange: #ff6b35;
+            --color-purple: #8a2be2;
+            --color-lime: #00ff66;
+            --color-pink: #ff007f;
+            --text-light: #ffffff;
+            --text-muted: #c3b8d8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+        }
+
+        /* Навигация */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(13, 7, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 15px 20px;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-lime);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--color-lime);
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: var(--color-lime);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .lesson-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(0, 255, 102, 0.2);
+            border: 1px solid var(--color-lime);
+            color: var(--color-lime);
+            font-weight: 700;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Контент блоктары */
+        .content-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .content-section h2 {
+            font-size: 1.5rem;
+            color: var(--color-lime);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        /* Плеер демосы */
+        .player-demo-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-purple);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .music-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: var(--color-pink);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+        }
+
+        /* Ескерту / Кеңес блогы */
+        .tip-box {
+            margin-top: 20px;
+            padding: 18px;
+            background: rgba(0, 255, 102, 0.1);
+            border-left: 4px solid var(--color-lime);
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .tip-box strong {
+            color: var(--color-lime);
+        }
+
+        /* Код блогы */
+        .code-snippet {
+            background: #050209;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 0.88rem;
+            color: var(--color-lime);
+            overflow-x: auto;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+
+        /* Промт блогы */
+        .prompt-box {
+            background: rgba(138, 43, 226, 0.1);
+            border: 1px dashed var(--color-purple);
+            border-radius: 12px;
+            padding: 18px;
+            margin: 15px 0;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: monospace;
+            line-height: 1.6;
+        }
+
+        /* Навигация батырмалары */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .nav_btn {
+            padding: 16px 28px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-prev:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-next {
+            background: linear-gradient(45deg, var(--color-orange), var(--color-lime));
+            color: #000;
+            box-shadow: 0 10px 25px rgba(0, 255, 102, 0.3);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 255, 102, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav_btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="module2.html" class="btn-back">← 2-Модульге қайту</a>
+            <div class="brand-logo">SHAQURT</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="lesson-header">
+            <div class="lesson-hero">
+                <span class="lesson-badge">5-сабақ • 2-Модуль (Қорытынды)</span>
+                <h1 class="lesson-title">Фонолық музыка және Аудиоплеер</h1>
+                <p class="lesson-subtitle">Шақыру сайтына әуен қосу, AI көмегімен бірегей музыка жасау және плеер батырмасын баптау.</p>
+            </div>
+        </div>
+
+        <!-- 1-Бөлім: Музыканың маңызы -->
+        <div class="content-section">
+            <h2>🎵 Музыка мереке атмосферасын қалай құрады?</h2>
+            <p>Электронды шақыру сайтын ашқан сәтте қатар ойная бастаған жұмсақ романтикалық әуен немесе тойдың әуені қонақтың көңіл-күйін бірден көтеріп, ерекше әсер сыйлайды.</p>
+            <p>Алайда, мобильді браузерлердің қауіпсіздік саясаты бойынша сайт ашылғалы жатқанда музыканың автоматты түрде рұқсатсыз ойнауына шектеу қойылған. Сондықтан біз қонаққа ыңғайлы <em>«Музыканы қосу / өшіру»</em> батырмасын жасауды үйренеміз.</p>
+            
+            <!-- Плеер демосы -->
+            <div class="player-demo-box">
+                <p style="color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem;">🎧 Сайттағы плеердің көрінісі:</p>
+                <button class="music-btn">
+                    <span>▶ Музыканы қосу</span>
+                </button>
+            </div>
+
+            <div class="tip-box">
+                💡 <strong>Маңызды ереже:</strong> Музыка трегі тым ауыр болмауы керек. MP3 форматындағы, көлемі 2-3 МБ-тан аспайтын қысқа әрі сапалы үзіндіні қолданған жөн.
+            </div>
+        </div>
+
+        <!-- 2-Бөлім: AI көмегімен музыка жасау (Жаңа бөлім) -->
+        <div class="content-section">
+            <h2>✨ AI (Жасанды Интеллект) көмегімен бірегей әуен жасау</h2>
+            <p>Қазіргі заманда интернеттен дайын әуен іздеу міндетті емес. Дәл осы ЖАСАНДЫ ИНТЕЛЛЕКТ (AI) арқылы немесе арнайы музыкалық нейрожелілер (мысалы, Suno немесе Udio) арқылы клиенттің тойына арналған арнайы эксклюзивті романтикалық әуенді немесе ремиксті өзің жасап шығаруыңа болады!</p>
+            <p>Егер саған сайтқа арналған әуен немесе оның концепциясы қажет болса, маған (AI-ға) тікелей төмендегідей тапсырма беріп, шақыруға арналған идеялар ала аласың:</p>
+
+            <p style="color: #fff; font-weight: 600; margin-top: 15px;">🤖 Маған (AI-ға) жазатын дұрыс промт (үлгі):</p>
+            <div class="prompt-box">
+                "Сәлем! Маған үйлену тойына арналған онлайн шақыру сайтына фонолық музыка ретінде қолдануға болатын, сөзі жоқ, тыныш, романтикалық, гитара мен пианино үні басым, ұзақтығы 1 минуттық әуеннің сипатын (немесе Suno AI-ға арналған стиль промтын) жазып берші."
+            </div>
+
+            <div class="tip-box" style="border-left-color: var(--color-pink); background: rgba(255, 0, 127, 0.05);">
+                🎨 <strong>Шығармашылық еркіндік:</strong> AI көмегімен әрбір тапсырыс берушіге жеке әуен немесе дыбыстық сүйемелдеу жасау арқылы қызметіңнің құнын бірнеше есе жоғары бағалай аласың!
+            </div>
+        </div>
+
+        <!-- 3-Бөлім: HTML & Audio тегі -->
+        <div class="content-section">
+            <h2>💻 HTML-де аудио элементін жасау</h2>
+            <p>Сайтқа әуен қосу үшін HTML-дің <code>&lt;audio&gt;</code> тегі қолданылады:</p>
+
+            <div class="code-snippet">
+&lt;!-- Аудио файлды қосу --&gt;<br>
+&lt;audio id="weddingSong" loop&gt;<br>
+&nbsp;&nbsp;&lt;source src="music.mp3" type="audio/mp3"&gt;<br>
+&lt;/audio&gt;<br>
+<br>
+&lt;!-- Батырма --&gt;<br>
+&lt;button onclick="toggleMusic()" id="playBtn"&gt;🎵 Әуенді қосу&lt;/button&gt;
+            </div>
+        </div>
+
+        <!-- 4-Бөлім: JavaScript логикасы -->
+        <div class="content-section">
+            <h2>⚙️ JavaScript арқылы музыканы басқару</h2>
+            <p>Қонақ батырманы басқан кезде музыка қосылып немесе тоқтап тұруы үшін мынадай қысқа JavaScript скриптін жазамыз:</p>
+
+            <div class="code-snippet">
+const song = document.getElementById("weddingSong");<br>
+const btn = document.getElementById("playBtn");<br>
+<br>
+function toggleMusic() {<br>
+&nbsp;&nbsp;if (song.paused) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song.play();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;btn.innerText = "⏸ Өшіру";<br>
+&nbsp;&nbsp;} else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song.pause();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;btn.innerText = "🎵 Қосу";<br>
+&nbsp;&nbsp;}<br>
+}
+            </div>
+
+            <div class="tip-box" style="border-left-color: var(--color-lime); background: rgba(0, 255, 102, 0.05);">
+                🎉 <strong>Құттықтаймыз!</strong> Осылайша сіз 2-Модульдің барлық негізгі интерактивті фишкаларын (RSVP, Telegram-ға жіберу, Карталар, Таймер, Музыка және AI музыка концепциясы) толық меңгердіңіз!
+            </div>
+        </div>
+
+        <!-- Навигация батырмалары -->
+        <div class="nav-buttons">
+            <a href="lesson2_4.html" class="nav_btn btn-prev">← 2.4-сабақ</a>
+            <a href="module2.html" class="nav_btn btn-next">2-Модульді аяқтау (Тізімге өту) ➔</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 SHAQURT Курсы. 2-Модуль сәтті аяқталды.</p>
+    </footer>
+
+</body>
+</html>

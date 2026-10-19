@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaqurt — 2.1-сабақ: RSVP формасы</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0d0714;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --color-orange: #ff6b35;
+            --color-purple: #8a2be2;
+            --color-lime: #00ff66;
+            --color-pink: #ff007f;
+            --text-light: #ffffff;
+            --text-muted: #c3b8d8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+        }
+
+        /* Навигация */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(13, 7, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 15px 20px;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-lime);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--color-lime);
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: var(--color-lime);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .lesson-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(138, 43, 226, 0.2);
+            border: 1px solid var(--color-purple);
+            color: #d8b4fe;
+            font-weight: 700;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Контент блоктары */
+        .content-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .content-section h2 {
+            font-size: 1.5rem;
+            color: var(--color-lime);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        /* Ескерту / Кеңес блогы */
+        .tip-box {
+            margin-top: 20px;
+            padding: 18px;
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid var(--color-orange);
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .tip-box strong {
+            color: var(--color-orange);
+        }
+
+        /* Тізім стилі */
+        .custom-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .custom-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
+        .custom-list li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--color-pink);
+            font-weight: bold;
+        }
+
+        /* Код блогы */
+        .code-snippet {
+            background: #050209;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 0.88rem;
+            color: var(--color-lime);
+            overflow-x: auto;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+
+        /* Интерфейс демосы */
+        .demo-form-container {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-purple);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .demo-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .demo-select {
+            width: 100%;
+            padding: 12px 15px;
+            background: #1a0b2e;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .demo-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--color-lime);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Навигация батырмалары */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            padding: 16px 28px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-prev:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-next {
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="module2.html" class="btn-back">← 2-Модульге қайту</a>
+            <div class="brand-logo">SHAQURT</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="lesson-header">
+            <div class="lesson-hero">
+                <span class="lesson-badge">1-сабақ • 2-Модуль</span>
+                <h1 class="lesson-title">RSVP формасы (Қонақтардың қатысуын растау)</h1>
+                <p class="lesson-subtitle">Шақыру сайтын қарапайым парақшадан интерактивті сервисге айналдыратын ең негізгі құралды нөлден үйренеміз.</p>
+            </div>
+        </div>
+
+        <!-- 1-Бөлім: RSVP деген не? -->
+        <div class="content-section">
+            <h2>📜 RSVP деген не және ол не үшін керек?</h2>
+            <p><strong>RSVP</strong> — бұл француздың <em>«Répondez s'il vous plaît»</em> деген сөзінен шыққан, аударғанда <strong>«Өтінеміз, жауап беріңізші»</strong> дегенді білдіреді.</p>
+            <p>Бұрын той иелері жүздеген қонаққа жеке-жеке хабарласып, «Тойға келесіз бе, жоқ па?» деп сұрайтын. Бұл өте көп уақыт пен нервті алатын процесс еді. Ал қазір электронды шақырудағы RSVP формасының арқасында қонақ өзі смартфонынан 10 секунд ішінде жауап береді.</p>
+            
+            <p><strong>RSVP формасы той иесіне не береді?</strong></p>
+            <ul class="custom-list">
+                <li><strong>Нақты қонақтар санын білу:</strong> Ресторанға канша орынға (столға) тапсырыс беретінін нақты есептейді.</li>
+                <li><strong>Бюджетті үнемдеу:</strong> Келмейтін қонақтардың орнына артық ақша төлемейді.</li>
+                <li><strong>Сусын мен меню таңдауы:</strong> Қонақтардың қай түрін қалайтынын алдын ала біліп отырады.</li>
+            </ul>
+
+            <div class="tip-box">
+                💡 <strong>Шақырту жасаушы үшін бизнес-артықшылық:</strong> RSVP формасы бар сайттар қарапайым шақыруларға қарағанда <strong>2-3 есе қымбат</strong> бағаланады!
+            </div>
+        </div>
+
+        <!-- 2-Бөлім: Форманың құрылымы -->
+        <div class="content-section">
+            <h2>🧩 RSVP формасы неден тұрады?</h2>
+            <p>Стандартты той шақыруындағы форма мынадай өрістерден тұруы керек:</p>
+            
+            <ul class="custom-list">
+                <li><strong>Қонақтың Аты-жөні</strong> (Input, text өрісі)</li>
+                <li><strong>Тойға қатысу мәртебесі</strong> (Радио-батырмалар: «Әрине, келемін» / өкінішке орай «Келе алмаймын»)</li>
+                <li><strong>Кіммен келетіні</strong> (Секция: «Жұбайыммен», «Отбасыммен», «Жалғыз»)</li>
+                <li><strong>Тілек немесе ескертпе</strong> (Textarea өрісі)</li>
+            </ul>
+
+            <!-- Демо форма көрнекілігі -->
+            <div class="demo-form-container">
+                <p style="color: var(--color-lime); font-weight: bold; margin-bottom: 10px;">👇 Сайтта қалай көрінеді (Мысал):</p>
+                <input type="text" class="demo-input" placeholder="Аты-жөніңіз (Мысалы: Аслан)">
+                <select class="demo-select">
+                    <option>Тойға қатысасыз ба?</option>
+                    <option>🟢 Әрине, келемін!</option>
+                    <option>🔴 Өкінішке орай, келе алмаймын</option>
+                </select>
+                <button class="demo-btn">Жауапты жіберу</button>
+            </div>
+        </div>
+
+        <!-- 3-Бөлім: HTML-де жазу -->
+        <div class="content-section">
+            <h2>💻 HTML-де RSVP формасының базалық коды</h2>
+            <p>Төмендегі код арқылы өзіңіздің алғашқы RSVP формаңыздың қаңқасын жасай аласыз. Кодтағы әрбір элемент арнайы <code>&lt;form&gt;</code> тегінің ішінде орналасады:</p>
+
+            <div class="code-snippet">
+&lt;form class="rsvp-form"&gt;<br>
+&nbsp;&nbsp;&lt;label&gt;Сіздің аты-жөніңіз:&lt;/label&gt;<br>
+&nbsp;&nbsp;&lt;input type="text" placeholder="Аты-жөніңізді жазыңыз" required&gt;<br>
+<br>
+&nbsp;&nbsp;&lt;label&gt;Келу мүмкіндігіңіз:&lt;/label&gt;<br>
+&nbsp;&nbsp;&lt;select&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="yes"&gt;Куанышпен қатысамын!&lt;/option&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="no"&gt;Өкінішке орай, келе алмаймын&lt;/option&gt;<br>
+&nbsp;&nbsp;&lt;/select&gt;<br>
+<br>
+&nbsp;&nbsp;&lt;button type="submit"&gt;Жауапты растау&lt;/button&gt;<br>
+&lt;/form&gt;
+            </div>
+
+            <div class="tip-box" style="border-left-color: var(--color-lime); background: rgba(0, 255, 102, 0.05);">
+                📱 <strong>Мобильдік дизайн ережесі:</strong> Түймелер мен өрістер телефоннан басқанда бармаққа ыңғайлы болуы үшін олардың биіктігі кемінде <strong>45px - 50px</strong> болуы шарт!
+            </div>
+        </div>
+
+        <!-- Навигация батырмалары -->
+        <div class="nav-buttons">
+            <a href="module2.html" class="nav-btn btn-prev">← Модульге қайту</a>
+            <a href="lesson2_2.html" class="nav-btn btn-next">2.2-сабақ: Жауаптарды Telegram-ға бағыттау ➔</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 SHAQURT Курсы. 2.1-сабақ оқу материалы.</p>
+    </footer>
+
+</body>
+</html>

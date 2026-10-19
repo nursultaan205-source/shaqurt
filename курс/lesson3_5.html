@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaqurt — 3.5-сабақ: Переписка & Сату Скрипттері</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0d0714;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --color-orange: #ff6b35;
+            --color-purple: #8a2be2;
+            --color-lime: #00ff66;
+            --color-pink: #ff007f;
+            --text-light: #ffffff;
+            --text-muted: #c3b8d8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+        }
+
+        /* Навигация */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(13, 7, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 15px 20px;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-lime);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            background: rgba(0, 255, 102, 0.1);
+            border: 1px solid var(--color-lime);
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: var(--color-lime);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+        }
+
+        .brand-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--color-orange), var(--color-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Контейнер */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .lesson-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .lesson-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255, 0, 127, 0.2);
+            border: 1px solid var(--color-pink);
+            color: var(--color-pink);
+            font-weight: 700;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Контент блоктары */
+        .content-section {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 0, 127, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .content-section h2 {
+            font-size: 1.5rem;
+            color: var(--color-pink);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-section p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        /* Ескерту / Кеңес блогы */
+        .tip-box {
+            margin-top: 20px;
+            padding: 18px;
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid var(--color-orange);
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .tip-box strong {
+            color: var(--color-orange);
+        }
+
+        /* Чат хабарламалары демосы */
+        .chat-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .msg {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .msg-client {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .msg-seller {
+            background: linear-gradient(45deg, var(--color-purple), var(--color-pink));
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        /* Скрипт карталары */
+        .script-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid var(--color-lime);
+            border-radius: 0 12px 12px 0;
+            padding: 18px;
+            margin: 15px 0;
+        }
+
+        .script-card h4 {
+            color: var(--color-lime);
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .script-card p {
+            font-size: 0.93rem;
+            margin-bottom: 0;
+            color: var(--text-light);
+        }
+
+        /* Навигация батырмалары */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            gap: 15px;
+        }
+
+        .nav_btn {
+            padding: 16px 28px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-prev:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-next {
+            background: linear-gradient(45deg, var(--color-orange), var(--color-lime));
+            color: #000;
+            box-shadow: 0 10px 25px rgba(0, 255, 102, 0.3);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 255, 102, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav_btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="module3.html" class="btn-back">← 3-Модульге қайту</a>
+            <div class="brand-logo">SHAQURT</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="lesson-header">
+            <div class="lesson-hero">
+                <span class="lesson-badge">5-сабақ • 3-Модуль (Қорытынды)</span>
+                <h1 class="lesson-title">Переписка & Сату Скрипттері</h1>
+                <p class="lesson-subtitle">Direct пен WhatsApp-та сауатты диалог жүргізу, қарсылықтармен (возражения) жұмыс және тапсырысты жабу.</p>
+            </div>
+        </div>
+
+        <!-- 1-Бөлім: Негізгі қателіктер -->
+        <div class="content-section">
+            <h2>💬 Перепискадағы 2 басты қателік</h2>
+            <p>Клиент «Сәлеметсіз бе, бағасы қанша?» деп жазған кезде, өте көп адам мына екі қателікті жібереді:</p>
+
+            <div class="script-card" style="border-left-color: var(--color-pink);">
+                <h4 style="color: var(--color-pink);">❌ 1-қателік: Жай ғана «15 000 тг» деп қысқа жаза салу</h4>
+                <p>Клиент бағаны көреді де, диалог аяқталады. Себебі сіз оған ешқандай ценность (құндылық) көрсете алмадыңыз.</p>
+            </div>
+
+            <div class="script-card" style="border-left-color: var(--color-pink);">
+                <h4 style="color: var(--color-pink);">❌ 2-қателік: «Война и мир» сияқты тым ұзын текст жіберу</h4>
+                <p>Клиент кішкентай экраннан ұзын километрлік тексті оқуға ерінеді де, жауап бермей қояды.</p>
+            </div>
+
+            <div class="tip-box">
+                🎯 <strong>Сатудың басты ережесі:</strong> Арнайы сұрақ қою арқылы **диалогты әрқашан өз бақылауыңызда ұстаңыз!** Егер сұрақ қоймасаңыз, диалог өледі.
+            </div>
+        </div>
+
+        <!-- 2-Бөлім: Дұрыс диалог үлгісі -->
+        <div class="content-section">
+            <h2>💬 Дұрыс Сату Диалогының Скрипті (Үлгі)</h2>
+            <p>Клиентпен әңгімені қалай дұрыс өрбіту керек екенін мына мысалдан көре аласыз:</p>
+
+            <div class="chat-box">
+                <div class="msg msg-client">Сәлеметсіз бе! Шақыру сайтының бағасы қанша болады?</div>
+                <div class="msg msg-seller">Армысыз! Сәтін салсын, қандай тойға (үйлену тойы, ұзату, туған күн) дайындалып жатыр едіңіздер? Сонған сай әдемі үлгілерді жіберейін 😊</div>
+                <div class="msg msg-client">Ұзату тойы еді, келесі айдың 15-іне.</div>
+                <div class="msg msg-seller">Керемет! Бақытты болсын! 🌸 Ұзатуға арналған 3 түрлі пакетіміз бар (Стандарт — 10 000₸, Премиум — 18 000₸). Тікелей Telegram-ға жауап жинайтын және фонолық әуен қосылған Премиум пакетіміз ең көп таңдалады. Сізге үлгіні көрсетсем бола ма?</div>
+                <div class="msg msg-client">Иә, көрсетіңізші.</div>
+                <div class="msg msg-seller">Міне, мына сілтеме арқылы ашып қараңыз. Егер осы стиль ұнаса, бүгін сізден ақпараттарды алып, ертеңге дайын қылып бере аламын! Тапсырысты рәсімдейміз бе?</div>
+            </div>
+        </div>
+
+        <!-- 3-Бөлім: Қарсылықтармен жұмыс -->
+        <div class="content-section">
+            <h2>🛡️ «Ойланып көрейін» мен «Қымбат екен» қарсылықтары</h2>
+            <p>Клиенттердің жиі айтатын екі қарсылығына сенімді жауап беру тәсілдері:</p>
+
+            <div class="script-card">
+                <h4>1. «Ойланып көрейін...» дегенде:</h4>
+                <p><strong>Жауап:</strong> <em>«Әрине, ойланыңыз! Ыңғайлы болу үшін айта кетейін, бізде осы аптада тапсырыс бергендерге арнайы фонолық музыка мен 2GIS навигациясын тегін қосып беру акциясы жүріп жатыр. Сізге орын броньдап қояйын ба?»</em></p>
+            </div>
+
+            <div class="script-card">
+                <h4>2. «Сәл қымбат екен...» дегенде:</h4>
+                <p><strong>Жауап:</strong> <em>«Түсінемін, той дайындығында бюджет өте маңызды. Бірақ біздің веб-шақыру қағаз шақыру сияқты жоғалмайды, қонақтардың келуін 100% нақты есептеп, ресторанда ақшаңызды үнемдеуге көмектеседі. Қаласаңыз, сіздің бюджетіңізге ыңғайлы 10 000 ₸ Стандарт пакетін жасап берейін?»</em></p>
+            </div>
+
+            <div class="tip-box" style="border-left-color: var(--color-lime); background: rgba(0, 255, 102, 0.05);">
+                🎉 <strong>Курстың соңы!</strong> Құттықтаймыз! Сіз **SHAQURT** курсының барлық 3 модулін де толық аяқтадыңыз. Енді алған біліміңізді практикада қолданып, алғашқы табысыңызға шығуыңызға тілектеспіз!
+            </div>
+        </div>
+
+        <!-- Навигация батырмалары -->
+        <div class="nav-buttons">
+            <a href="lesson3_4.html" class="nav_btn btn-prev">← 3.4-сабақ</a>
+            <a href="main.html" class="nav_btn btn-next">Басты бетке оралу (Курсты аяқтау) 🏁</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 SHAQURT Курсы. Барлық модульдер сәтті аяқталды.</p>
+    </footer>
+
+</body>
+</html>
